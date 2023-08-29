@@ -24,6 +24,9 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+#検索機能
+gem 'ransack'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -44,6 +47,14 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+# My Custom Gems
+gem 'devise', '~> 4.8', '>= 4.8.1'
+
+gem 'rails_admin'
+gem 'pagy'
+gem 'active_analytics'
+gem 'punching_bag'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -82,4 +93,7 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+gem "sassc-rails"
+gem "redis", "~> 4.0"
 
