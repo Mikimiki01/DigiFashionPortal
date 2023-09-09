@@ -1,24 +1,18 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: [:index, :show]
-include Pagy::Backend
+  include Pagy::Backend
+
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(:created_at => :asc)
+    @posts = Post.order(created_at: :asc)
     @pagy, @posts = pagy_countless(@posts, items: 1)
-
   end
-  def show
 
-   end
-
-   def discover
-
+  def discover
     @posts = Post.all
+  end
 
-
-
-   end
   # GET /posts/1 or /posts/1.json
   def show
     @comment = @post.comments.build
@@ -27,21 +21,36 @@ include Pagy::Backend
   def myposts
     @posts = Post.all
   end
+
   # GET /posts/new
   def new
     @post = Post.new
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
 
+    # 画像が存在する場合のみVisionを呼び出す
+    # ["", "XXXX", "YYYY"]　=> ["XXXX", "YYYY"]
+    # images = post_params[:images].??????
+    # images.first
+    if post_params[:images].present? && post_params[:images].last.present?
+      tags = Vision.get_image_data(post_params[:images].last)
+    end
+
     respond_to do |format|
       if @post.save
+        tags.each do |tag_name|
+          # 既存のタグを探すか、新しいタグを作成する
+          tag = Tag.find_or_create_by(name: tag_name)
+          # PostTag を使用して、投稿とタグの間の関係を作成する
+          @post.post_tags.create(tag: tag)
+        end if tags
+
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -75,13 +84,14 @@ include Pagy::Backend
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title, :description, :keywords, :user_id, images: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :description, :keywords, :user_id, images: [])
+  end
 end
