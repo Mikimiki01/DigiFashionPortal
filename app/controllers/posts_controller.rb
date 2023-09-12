@@ -95,3 +95,4 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :description, :keywords, :user_id, images: [])
   end
 end
+#posts 編集練習
