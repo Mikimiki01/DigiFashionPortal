@@ -23,3 +23,7 @@
     <%= post.title %>
   </p>
 </div>
+
+<% @post.tags.each do |tag| %>
+  <span class="tag"><%= tag.name %></span>
+<% end %>

@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   tags = []
 
   if images.present?
-    tags = Vision.get_image_data(images.last)
+    tags = Vision.get_image_data(images.last).take(3) # 最大3つのタグを取得
   end
 
     respond_to do |format|
@@ -86,14 +86,17 @@ class PostsController < ApplicationController
       end
     end
   end
+  
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
+  @post.comments.destroy_all
+  @post.likes.destroy_all
+  @post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+  respond_to do |format|
+    format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+    format.json { head :no_content }
     end
   end
 

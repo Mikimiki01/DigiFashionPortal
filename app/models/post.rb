@@ -22,4 +22,10 @@ class Post < ApplicationRecord
       self.id = SecureRandom.random_number(1_000_000_000)
     end while Post.where(id: self.id).exists?
   end
+  
+  def delete_related_data
+    comments.destroy_all
+    likes.destroy_all
+  end
+  
 end

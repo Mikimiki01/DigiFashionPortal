@@ -17,7 +17,7 @@
 
 
 <ul>
-  <% @tags.each do |tag| %>
+  <% @tags.take(3).each do |tag| %>
     <li><%= tag.name %></li>
   <% end %>
 </ul>
