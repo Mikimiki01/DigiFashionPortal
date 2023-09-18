@@ -1,32 +1,22 @@
-<%= stylesheet_link_tag("post")%>
-<% if user_signed_in? %>
-  <% if current_user.admin? %>
-    You are an Admin
-  <% end %>
-  <% current_user.follow_requests.each do |request| %>
-    <%= request.followerable.email %> Wants to follow you 
-    <%= button_to "Accept", accept_path(request.followerable) %>
-    <%= button_to "Decline", decline_path(request.followerable) %>
-  <% end %>
-  Followers
-  <% current_user.followers.each do |follower| %>
-    <p> <b> <%= link_to follower.email, follower %> </b> </p>
-  <% end %>
-  Following
-  <% current_user.following.each do |following| %>
-    <p> <%= link_to following.email, following %> </p>
-  <% end %>
-<% end %>
+<%= stylesheet_link_tag("post") %>
 <p style="color: green"><%= notice %></p>
-<%= turbo_frame_tag :results, data: { turbo_action: 'advance' } do %>
-  <div id="posts"></div>
-  <%= turbo_frame_tag :pagination, loading: :lazy,
-                      src: posts_path(format: :turbo_stream) %>
-<% end %>
+<div id="posts" class="text-center masonry-grid">
+  <% @posts.each do |post| %>
+    <div class="post-content masonry-item">
+      <!-- 画像表示 -->
+      <div class="post-image">
+        <%= link_to post_path(post) do %>
+          <%= image_tag post.images.first if post.images.any? %>
+        <% end %>
 
+        <div class="post-author">
+          <%= link_to post.user.username, user_path(post.user) %>
+        </div>
 
-<ul>
-  <% @tags.each do |tag| %>
-    <li><%= tag.name %></li>
+        <div class="like-button">
+          <%= button_to "☆", like_path(post) %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
