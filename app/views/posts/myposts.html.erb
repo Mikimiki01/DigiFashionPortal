@@ -4,6 +4,10 @@
   <% @posts.each do |post| %>
     <% if post.user.id == current_user.id %>
       <%= render post %>
+    <!-- 削除ボタンを -->
+      <div class="post-delete-btn">
+        <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      </div>
     <% end %>
   <% end %>
 </div>

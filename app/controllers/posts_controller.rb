@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: [:index, :show]
   include Pagy::Backend
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /posts or /posts.json
   def index
@@ -94,5 +95,9 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :description, :keywords, :user_id, images: [])
   end
+  
+  def record_not_found
+    redirect_to posts_url, alert: "指定された投稿が見つかりませんでした。"
+  end
+  
 end
-#posts 編集練習
