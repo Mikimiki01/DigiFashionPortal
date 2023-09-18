@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @comment = @post.comments.build
-    @tags = Tag.all
+    @tags = @post.tags
   end
 
   def myposts
