@@ -1,25 +1,28 @@
-.post-container
-{
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
-  padding: 20px;
-  position: relative;
+.post-content {
+    /* 他のスタイルを保持しながら、新しいスタイルを追加 */
+    padding: 15px; /* 内側のスペースを調整 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
-.post-link
-{
-  position: absolute;
-  width: 100%;
-  height: 100%;
 
-  top: 0;
-  left: 0;
-  z-index: 4;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+.post-comments p {
+    margin-bottom: 10px; /* コメント間のスペースを追加 */
 }
-.post-link:hover
-{
-  opacity: 0.3;
+
+.post-delete-btn {
+    margin-top: 10px; /* 削除ボタンの上のスペースを追加 */
+}
+
+/* 関連タグのスタイルを調整 */
+.post-content ul {
+    list-style-type: none; /* リストのマーカーを削除 */
+    padding-left: 0; /* リストの左側のパディングを削除 */
+}
+
+.post-content li {
+    display: inline-block; /* タグを横並びにする */
+    margin-right: 10px; /* 各タグの間にスペースを追加 */
+    background-color: #f2f2f2; /* タグの背景色を設定 */
+    padding: 5px; /* タグ内のスペースを調整 */
+    border-radius: 5px; /* タグの角を丸くする */
 }

@@ -8,24 +8,29 @@ class PostsController < ApplicationController
   def index
     @posts = Post.order(created_at: :asc)
     @pagy, @posts = pagy_countless(@posts, items: 1)
+    @tags = Tag.all
   end
 
   def discover
     @posts = Post.all
+    @tags = Tag.all
   end
 
   # GET /posts/1 or /posts/1.json
   def show
     @comment = @post.comments.build
+    @tags = Tag.all
   end
 
   def myposts
     @posts = Post.all
+    @tags = Tag.all
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    
   end
 
   # GET /posts/1/edit
@@ -39,9 +44,17 @@ class PostsController < ApplicationController
     # ["", "XXXX", "YYYY"]　=> ["XXXX", "YYYY"]
     # images = post_params[:images].??????
     # images.first
-    if post_params[:images].present? && post_params[:images].last.present?
-      tags = Vision.get_image_data(post_params[:images].last)
-    end
+    #if post_params[:images].present? && post_params[:images].last.present?
+      #tags = Vision.get_image_data(post_params[:images].last)
+    #end
+    
+    # 画像が存在する場合のみVisionを呼び出す
+  images = post_params[:images].reject(&:blank?)
+  tags = []
+
+  if images.present?
+    tags = Vision.get_image_data(images.last)
+  end
 
     respond_to do |format|
       if @post.save

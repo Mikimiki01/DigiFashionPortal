@@ -3,10 +3,33 @@
 <div id="posts" class="text-center">
   <% @posts.each do |post| %>
     <% if post.user.id == current_user.id %>
-      <%= render post %>
-    <!-- 削除ボタンを -->
-      <div class="post-delete-btn">
-        <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      <div class="post-content">
+        <h3><%= post.title %></h3> <!-- タイトルを表示 -->
+        <%= render post %>
+        
+        <!-- コメントを表示 -->
+        <div class="post-comments">
+          <% post.comments.each do |comment| %>
+            <p><%= comment.text %></p>
+          <% end %>
+        </div>
+
+        <div class="like-section">
+          <!-- ここにlikeボタンとlikeの合計を配置 -->
+          <%= link_to "Like", "#", class: "like-btn" %> <!-- likeボタンの例です -->
+          <p>Total likes: <%= post.likes.count %></p> <!-- likesの合計の例です -->
+        </div>
+
+        <!-- 削除ボタンを追加 -->
+        <div class="post-delete-btn">
+          <%= link_to 'delete', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+        </div>
+        
+        <ul>
+          <% post.tags.each do |tag| %>
+            <li><%= tag.name %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
   <% end %>

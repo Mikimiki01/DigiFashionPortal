@@ -1,3 +1,10 @@
 <% @posts.each do |post| %>
   <%= render post %>
 <% end %>
+
+<p1>関連タグ:</p1>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
