@@ -9,14 +9,13 @@
     </div>
   <% end %>
 <% end %>
-<%= render "comments/form", comment: @comment%>
-<%- @post.comments.each do |comment|%>
-  <%= comment.text%>
+<%= render "comments/form", comment: @comment %>
+<%- @post.comments.each do |comment| %>
+  <%= comment.text %>
   <br>
 <% end %>
 
 
-<p1>関連タグ:</p2>
 <ul>
   <% @tags.each do |tag| %>
     <li><%= tag.name %></li>

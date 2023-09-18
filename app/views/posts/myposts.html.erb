@@ -1,35 +1,23 @@
 <%= stylesheet_link_tag("post")%>
 <p style="color: green"><%= notice %></p>
-<div id="posts" class="text-center">
+<div id="posts" class="text-center masonry-grid">
   <% @posts.each do |post| %>
     <% if post.user.id == current_user.id %>
-      <div class="post-content">
-        <h3><%= post.title %></h3> <!-- タイトルを表示 -->
-        <%= render post %>
-        
-        <!-- コメントを表示 -->
-        <div class="post-comments">
-          <% post.comments.each do |comment| %>
-            <p><%= comment.text %></p>
+      <div class="post-content masonry-item">
+        <!-- 画像表示 -->
+        <div class="post-image">
+          <%= link_to post_path(post) do %>
+            <%= image_tag post.images.first if post.images.any? %>
           <% end %>
-        </div>
 
-        <div class="like-section">
-          <!-- ここにlikeボタンとlikeの合計を配置 -->
-          <%= link_to "Like", "#", class: "like-btn" %> <!-- likeボタンの例です -->
-          <p>Total likes: <%= post.likes.count %></p> <!-- likesの合計の例です -->
-        </div>
+          <div class="post-author">
+            <%= link_to post.user.username, user_path(post.user) %>
+          </div>
 
-        <!-- 削除ボタンを追加 -->
-        <div class="post-delete-btn">
-          <%= link_to 'delete', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+          <div class="like-button">
+            <%= button_to "☆", like_path(post) %>
+          </div>
         </div>
-        
-        <ul>
-          <% post.tags.each do |tag| %>
-            <li><%= tag.name %></li>
-          <% end %>
-        </ul>
       </div>
     <% end %>
   <% end %>

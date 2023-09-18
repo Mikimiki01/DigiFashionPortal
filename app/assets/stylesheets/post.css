@@ -1,28 +1,63 @@
+.masonry-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.masonry-item {
+  flex: 1;
+  break-inside: avoid;
+}
+
 .post-content {
-    /* 他のスタイルを保持しながら、新しいスタイルを追加 */
-    padding: 15px; /* 内側のスペースを調整 */
-    border: 1px solid #ddd;
+    position: relative;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.post-image {
+    position: relative;
+    max-width: 100%;
     border-radius: 5px;
 }
 
-.post-comments p {
-    margin-bottom: 10px; /* コメント間のスペースを追加 */
+.post-image img {
+    max-width: 100%;
+    border-radius: 5px;
 }
 
-.post-delete-btn {
-    margin-top: 10px; /* 削除ボタンの上のスペースを追加 */
+.post-author {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 3px;
 }
 
-/* 関連タグのスタイルを調整 */
-.post-content ul {
-    list-style-type: none; /* リストのマーカーを削除 */
-    padding-left: 0; /* リストの左側のパディングを削除 */
+.like-button {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 3px;
+    border-radius: 1px;
+    font-size: 15px;
 }
 
-.post-content li {
-    display: inline-block; /* タグを横並びにする */
-    margin-right: 10px; /* 各タグの間にスペースを追加 */
-    background-color: #f2f2f2; /* タグの背景色を設定 */
-    padding: 5px; /* タグ内のスペースを調整 */
-    border-radius: 5px; /* タグの角を丸くする */
+.masonry-item {
+  flex: 0 0 100%;
+}
+
+@media (min-width: 600px) {
+  .masonry-item {
+    flex: 0 0 calc(50% - 16px); /* 16pxは投稿間のギャップ */
+  }
+}
+
+@media (min-width: 900px) {
+  .masonry-item {
+    flex: 0 0 calc(33.33% - 16px);
+  }
 }

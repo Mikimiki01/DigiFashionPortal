@@ -106,6 +106,8 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     ffi (1.15.5)
+    font-awesome-sass (6.4.2)
+      sassc (~> 2.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
@@ -140,6 +142,8 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    masonry-rails (0.2.4)
+      railties
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
@@ -282,8 +286,10 @@ DEPENDENCIES
   debug
   devise (~> 4.8, >= 4.8.1)
   dotenv-rails
+  font-awesome-sass
   importmap-rails
   jbuilder
+  masonry-rails
   mysql2
   net-imap
   net-pop

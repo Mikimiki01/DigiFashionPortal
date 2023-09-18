@@ -1,10 +1,22 @@
-<% @posts.each do |post| %>
-  <%= render post %>
-<% end %>
+<%= stylesheet_link_tag("post") %>
+<p style="color: green"><%= notice %></p>
+<div id="posts" class="text-center masonry-grid">
+  <% @posts.each do |post| %>
+    <div class="post-content masonry-item">
+      <!-- 画像表示 -->
+      <div class="post-image">
+        <%= link_to post_path(post) do %>
+          <%= image_tag post.images.first if post.images.any? %>
+        <% end %>
 
-<p1>関連タグ:</p1>
-<ul>
-  <% @tags.each do |tag| %>
-    <li><%= tag.name %></li>
+        <div class="post-author">
+          <%= link_to post.user.username, user_path(post.user) %>
+        </div>
+
+        <div class="like-button">
+          <%= button_to "☆", like_path(post) %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

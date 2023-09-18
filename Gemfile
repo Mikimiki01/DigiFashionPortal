@@ -97,3 +97,6 @@ gem "net-imap"
 gem "sassc-rails"
 gem "redis", "~> 4.0"
 
+gem 'masonry-rails'
+
+
