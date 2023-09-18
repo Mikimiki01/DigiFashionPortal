@@ -30,5 +30,8 @@ Rails.application.routes.draw do
   get 'posts/myposts'
   get 'posts/discover'
   resources :posts
- root "posts#index"
+  root "posts#index"
+  
+  get 'myposts', to: 'posts#myposts'
+ 
 end

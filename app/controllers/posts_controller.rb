@@ -6,9 +6,8 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(created_at: :asc)
-    @pagy, @posts = pagy_countless(@posts, items: 1)
-    @tags = Tag.all
+    @posts = Post.order(created_at: :desc)
+    #@tags = Tag.all
   end
 
   def discover
@@ -95,7 +94,7 @@ class PostsController < ApplicationController
   @post.destroy
 
   respond_to do |format|
-    format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+    format.html { redirect_to myposts_url, notice: "Post was successfully destroyed." }
     format.json { head :no_content }
     end
   end
