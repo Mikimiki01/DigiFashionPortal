@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   mount ActiveAnalytics::Engine, at: "analytics" # http://localhost:3000/analytics
   end
   get 'profiles/index'
-
+  
   resources :likes, only: [:create, :destroy]
   resources :comments
 
