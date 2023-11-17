@@ -2,17 +2,15 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <%= link_to root_path do %>
-    <%= image_tag("digifashionportal_logo_full.png", alt: "Home", class: "logo-image", size: "100x100") %>
+    <%= image_tag("digifashionportal_logo_full.png", alt: "Home", class: "logo-image") %>
   <% end %>
-  
-  <div class="ml-auto">
+
+  <div class="search-container d-flex align-items-center ml-auto">
     <%= form_with url: profiles_index_path, method: :get do |form| %>
-      <div class="ml-auto"> 
-        <%= form.search_field :query, value: params[:query], placeholder: "Search", class:"search-field" %>
-        <%= form.submit "Search", class:"btn btn-primary" %>
-      </div>
+      <%= form.search_field :query, value: params[:query], placeholder: "Search", class: "search-field flex-grow-1" %>
+      <%= form.submit "Search", class: "btn btn-primary ml-2" %>
     <% end %>
-  </div> 
+  </div>
   
   <% if user_signed_in? %>
     <% if current_user.avatar.attached? %>
