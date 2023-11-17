@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.admin?
       return rails_admin_path
     else
-      return posts_new_path
+      return root_path
     end
   end
 

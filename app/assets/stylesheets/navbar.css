@@ -1,5 +1,48 @@
-.search-field
-{
-  padding: 20px;
-  border: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* 画面サイズがlg（大きい）以上の場合 */
+@media (min-width: 992px) {
+  .logo-image {
+    width: 300px; /* ロゴの幅を設定 */
+    height: auto; /* 高さは自動で調整 */
+  }
+
+  /* ナビゲーションリンクを含むnavbar-navを左寄せにする */
+  .navbar-nav {
+    margin-right: auto; /* 右のマージンを自動で設定して左寄せ */
+  }
+
+  /* 検索コンテナとユーザーアイテムを右寄せにする */
+  .search-container {
+    display: flex;
+    align-items: center; /* 要素を垂直方向に中央寄せ */
+    margin-left: auto; /* 左のマージンを自動で設定して右寄せ */
+  }
+
+  .search-field {
+    padding: 10px 20px;
+    border: none; /* ボーダーを消去 */
+    flex-grow: 1; /* フィールドがコンテナ内で利用可能なスペースをすべて使用するように設定 */
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    border: none; /* ボーダーを消去 */
+    flex-grow: 1;/* ボタンのパディングを調整 */
+    background-color: #CCCCCC; /* 背景色を #CCCCCC に設定 */
+    border-color: #CCCCCC;
+  }
+}
+
+/* 画面サイズがmd（中程度）の場合 */
+@media (max-width: 991px) {
+  /* 中程度の画面サイズに対応するスタイルをここに追加 */
+}
+
+/* 画面サイズがsm（小さい）以下の場合 */
+@media (max-width: 767px) {
+  /* 小さい画面サイズに対応するスタイルをここに追加 */
 }
